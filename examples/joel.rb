@@ -7,18 +7,9 @@ ENVEMAIL = 'EMAIL' + ENVNAME.upcase         # 'xxxxx@xxxxx.com'
 ENVPASSWORD = 'PASSWORD' + ENVNAME.upcase  # 'xxxxx'
 ENVROOM = 'ROOM' + ENVNAME.upcase          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
 
-puts ENVEMAIL
-puts ENVPASSWORD
-puts ENVROOM
-
 EMAIL = ENV[ENVEMAIL]
 PASSWORD = ENV[ENVPASSWORD]
 ROOM = ENV[ENVROOM]
-
-puts ENVEMAIL
-puts EMAIL
-puts PASSWORD
-puts ROOM
 
 TT.run(EMAIL, PASSWORD, :room => ROOM) do
   on :user_entered do |user|
