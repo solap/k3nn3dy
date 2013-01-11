@@ -1,0 +1,6 @@
+ENVNAME = ARGV.first
+
+ENVMAIL = 'EMAIL' + ENVNAME.upcase
+
+puts ENVMAIL
+
