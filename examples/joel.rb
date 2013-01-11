@@ -7,6 +7,7 @@ ENVEMAIL = 'EMAIL' + ENVNAME.upcase         # 'xxxxx@xxxxx.com'
 ENVPASSWORD = 'PASSWORD' + ENVNAME.upcase  # 'xxxxx'
 ENVROOM = 'ROOM' + ENVNAME.upcase          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
 
+NAME = "K3nn3dy" if ARGV[0] = "k3"
 EMAIL = ENV[ENVEMAIL]
 PASSWORD = ENV[ENVPASSWORD]
 ROOM = ENV[ENVROOM]
@@ -49,7 +50,9 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
         room.say(room.current_song.album)
       when /^\/skip$/
         song.skip
-
+      when /^\/commands$/
+        room.say("#{NAME} accepts the following commands: /album, /song, /artist, /hug, /kiss, /whodaman, /curse, and /hello. If #{NAME} is in the audience, you can command #{NAME} to /stepup. If at the table, /stepdown. If you are at the table, you can /dive.")
+        #room.say("test")
 
 
       # else
