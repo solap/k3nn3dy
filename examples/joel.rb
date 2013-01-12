@@ -1,18 +1,28 @@
 #!/usr/bin/env ruby
 # Each time a a new song starts, vote it up
+# Ruby style guide: https://github.com/bbatsov/ruby-style-guide
 require 'turntabler'
+load 'examples/bot.rb'
 
 ENVNAME = ARGV.first
 ENVEMAIL = 'EMAIL' + ENVNAME.upcase         # 'xxxxx@xxxxx.com'
 ENVPASSWORD = 'PASSWORD' + ENVNAME.upcase  # 'xxxxx'
 ENVROOM = 'ROOM' + ENVNAME.upcase          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
 
-NAME = "K3nn3dy" if ARGV[0] = "k3"
+NAME = "kdkjeiijlaksd" if ARGV[0] == "k"
+NAME = "K3nn3dy" if ARGV[0] == "k3"
+
 EMAIL = ENV[ENVEMAIL]
 PASSWORD = ENV[ENVPASSWORD]
 ROOM = ENV[ENVROOM]
 
+  #   exclude_array.unshift(hug)
+  #   exclude_array.pop if counter == 3
+  #   counter+=1 if counter < 3
+
+
 TT.run(EMAIL, PASSWORD, :room => ROOM) do
+  bot = Bot.new
   on :user_entered do |user|
     #user.become_fan
     room.say("#{salutation} @#{user.name}!")
@@ -21,9 +31,9 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
     song.vote
   end
   on :user_spoke do |message|
-    room.say yadda(message.content, message.sender) if message.sender.id != user.id
+    room.say yadda(message.content, message.sender, bot) if message.sender.id != user.id
   end
-  def yadda(incoming, sender)
+  def yadda(incoming, sender, bot)
     case incoming
       when /^\/hello$/
         return hello
@@ -34,7 +44,7 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
       when /^\/kiss$/
         return kiss
       when /^\/hug$/
-        return hug
+        room.say(bot.hug)
       when /^\/stepup$/
         room.become_dj
       when /^\/stepdown$/
@@ -53,7 +63,8 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
       when /^\/commands$/
         room.say("#{NAME} accepts the following commands: /album, /song, /artist, /hug, /kiss, /whodaman, /curse, and /hello. If #{NAME} is in the audience, you can command #{NAME} to /stepup. If at the table, /stepdown. If you are at the table, you can /dive.")
         #room.say("test")
-
+      when /^\/vomit$/
+        return vomit
 
       # else
       #   room.say("wtf does that mean?") if message.content
@@ -88,8 +99,6 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
       "I'm married, buddy. Well, I'm committed. Actually, I just don't like you."
     ].sample
   end
-
-
 
   def whodaman
     [
@@ -144,15 +153,34 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
       "Your lips taste like rainbows!",
       "I saw stars...did you see stars?",
       "You need a little more practice with a real girl before you try that again.",
-      "You realize I'm a guy, right?",
+      "Wait, are you a guy?",
       "It's business time!",
       "Your grandma kisses so much better than that.",
       "It's getting hot in here.",
       "You kind of remind me of my dad.",
       "Hmmmmm. A little like kissing a coke bottle.",
       "That was, like, the BEST ... KISS ... EVAARRRRR...",
-      "Don't kiss the bouncer, stud-muffin."
+      "Don't kiss the bouncer, stud-muffin.",
+      "Should someone of your gender be kissing someone of my gender?"
     ].sample
   end
+  def vomit
+    [
+      "BLAAEEEACCCRGGGHH.",
+      "* wipes the 'ol face *",
+      "Can you take it outside next time?",
+      "Someone please take away his glass.",
+      "Someone must have played 40's rap."
 
+    ].sample
+  end
 end
+
+
+
+# class yadda
+#   def return_stuff
+#     "stuff"
+#   end
+# end
+
