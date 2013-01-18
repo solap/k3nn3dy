@@ -21,7 +21,9 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
   bot = Bot.new
   on :user_entered do |user|
     #user.become_fan
-    room.say("#{bot.salutation} @#{user.name}!")
+    
+    prefix = user.name[0] == "@" ? '' : '@'
+    room.say("#{bot.salutation} #{prefix}#{user.name}!")
   end
   on :song_started do |song|
     song.vote
