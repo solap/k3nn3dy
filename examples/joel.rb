@@ -42,7 +42,7 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
       when /^\/hug$/
         room.say(bot.hug)
       when /^\/stepup$/
-        room.become_dj
+        room.become_dj # need error checking here
       when /^\/stepdown$/
         user.remove_as_dj # need error checking here
       when /^\/dive$/
