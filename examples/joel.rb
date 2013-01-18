@@ -9,8 +9,6 @@ ENVEMAIL = 'EMAIL' + ENVNAME.upcase         # 'xxxxx@xxxxx.com'
 ENVPASSWORD = 'PASSWORD' + ENVNAME.upcase  # 'xxxxx'
 ENVROOM = 'ROOM' + ENVNAME.upcase          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
 
-
-
 NAME = "kdkjeiijlaksd" if ARGV[0] == "k"
 NAME = "kindredfacekick" if ARGV[0] == "k2"
 NAME = "K3nn3dy" if ARGV[0] == "k3"
@@ -46,9 +44,9 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
       when /^\/stepup$/
         room.become_dj
       when /^\/stepdown$/
-        user.remove_as_dj
+        user.remove_as_dj # need error checking here
       when /^\/dive$/
-        sender.remove_as_dj
+        sender.remove_as_dj # need error checking here.
         return dive(sender.name)
       when /^\/song$/
         room.say("title: #{room.current_song.title}")
