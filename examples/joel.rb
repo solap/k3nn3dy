@@ -52,10 +52,10 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
         return dive(sender.name)
       when /^\/song$/
         room.say("title: #{room.current_song.title}")
-        room.say("isrc: #{room.current_song.isrc}")
-        room.say("source: #{room.current_song.source}")
-        room.say("source_id: #{room.current_song.source_id}")
-        room.say("current_song: #{room.current_song.inspect}")
+        # room.say("isrc: #{room.current_song.isrc}")
+        # room.say("source: #{room.current_song.source}")
+        # room.say("source_id: #{room.current_song.source_id}")
+        # room.say("current_song: #{room.current_song.inspect}")
       when /^\/artist$/
         room.say(room.current_song.artist)
       when /^\/album$/
