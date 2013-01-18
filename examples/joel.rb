@@ -2,30 +2,28 @@
 # Each time a a new song starts, vote it up
 # Ruby style guide: https://github.com/bbatsov/ruby-style-guide
 require 'turntabler'
-load 'examples/bot.rb'
+load '~/projects/turntabler/examples/bot.rb'
 
 ENVNAME = ARGV.first
 ENVEMAIL = 'EMAIL' + ENVNAME.upcase         # 'xxxxx@xxxxx.com'
 ENVPASSWORD = 'PASSWORD' + ENVNAME.upcase  # 'xxxxx'
 ENVROOM = 'ROOM' + ENVNAME.upcase          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
 
+
+
 NAME = "kdkjeiijlaksd" if ARGV[0] == "k"
+NAME = "kindredfacekick" if ARGV[0] == "k2"
 NAME = "K3nn3dy" if ARGV[0] == "k3"
 
 EMAIL = ENV[ENVEMAIL]
 PASSWORD = ENV[ENVPASSWORD]
 ROOM = ENV[ENVROOM]
 
-  #   exclude_array.unshift(hug)
-  #   exclude_array.pop if counter == 3
-  #   counter+=1 if counter < 3
-
-
 TT.run(EMAIL, PASSWORD, :room => ROOM) do
   bot = Bot.new
   on :user_entered do |user|
     #user.become_fan
-    room.say("#{salutation} @#{user.name}!")
+    room.say("#{bot.salutation} @#{user.name}!")
   end
   on :song_started do |song|
     song.vote
@@ -36,13 +34,13 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
   def yadda(incoming, sender, bot)
     case incoming
       when /^\/hello$/
-        return hello
+        room.say(bot.hello)
       when /^\/curse$/
-        return curse
+        room.say(bot.curse)
       when /^\/whodaman$/
-        return whodaman
+        room.say(bot.whodaman)
       when /^\/kiss$/
-        return kiss
+        room.say(bot.kiss)
       when /^\/hug$/
         room.say(bot.hug)
       when /^\/stepup$/
@@ -53,13 +51,17 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
         sender.remove_as_dj
         return dive(sender.name)
       when /^\/song$/
-        room.say(room.current_song.title)
+        room.say("title: #{room.current_song.title}")
+        room.say("isrc: #{room.current_song.isrc}")
+        room.say("source: #{room.current_song.source}")
+        room.say("source_id: #{room.current_song.source_id}")
+        room.say("current_song: #{room.current_song.inspect}")
       when /^\/artist$/
         room.say(room.current_song.artist)
       when /^\/album$/
         room.say(room.current_song.album)
       when /^\/skip$/
-        song.skip
+        room.current_song.skip
       when /^\/commands$/
         room.say("#{NAME} accepts the following commands: /album, /song, /artist, /hug, /kiss, /whodaman, /curse, and /hello. If #{NAME} is in the audience, you can command #{NAME} to /stepup. If at the table, /stepdown. If you are at the table, you can /dive.")
         #room.say("test")
@@ -70,7 +72,6 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
       #   room.say("wtf does that mean?") if message.content
     end
   end
-
   def dive user
     return [
       "#{user} lays it out!",
@@ -79,108 +80,7 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
       "Screams rise as #{user} catapults into the crowd!"
     ].sample
   end
-# unshift
-# pop
-  def salutation
-    [
-      "What up,",
-      "Howdy,",
-      "Yo",
-      "Yes,",
-      "Welcome,"
-    ].sample
-  end
 
-  def hug
-    [
-      "Get off me, punk!",
-      "Awwww, that's sweet.",
-      "Um, your breath smells like dead stuff.",
-      "I'm married, buddy. Well, I'm committed. Actually, I just don't like you."
-    ].sample
-  end
-
-  def whodaman
-    [
-      "My main man, Joel!",
-      "Manly Taddly!",
-      "Scott of the sensuous beard.",
-      "Queen Zlatina!",
-      "Guilty Gil Lee",
-      "Sky-in Bryan",
-      "Chris the Bicep",
-      "Pete Last Bro"
-    ].sample
-  end
-
-  def curse
-    [
-      "Damn you, Tadd!",
-      "Fetch!",
-      "Flip!",
-      "Freak!",
-      "Crud!",
-      "Scrud!",
-      "Dang it!",
-      "Shiz.",
-      "Shite.",
-      "Gol durn it!",
-      "For the love of Pete!",
-      "Filthin foul, filth, filth, foul!!"
-    ].sample
-  end
-
-  def hello
-    [
-      "Yo.",
-      "What up?",
-      "* ignores the noob *",
-      "* looks across the room and finds love *",
-      "Ijfi eizz shmieoo pcoi fur dee furmmeeing!!!"
-    ].sample
-  end
-
-  def kiss
-    [
-      "I WILL slap you!",
-      "<swoon>",
-      "I will END you!",
-      "Fresh!!",
-      "No tongue please.",
-      "<swoon>",
-      "You make my heart go bang, bang, bang!",
-      "You kiss like my brother!",
-      "Your lips taste like rainbows!",
-      "I saw stars...did you see stars?",
-      "You need a little more practice with a real girl before you try that again.",
-      "Wait, are you a guy?",
-      "It's business time!",
-      "Your grandma kisses so much better than that.",
-      "It's getting hot in here.",
-      "You kind of remind me of my dad.",
-      "Hmmmmm. A little like kissing a coke bottle.",
-      "That was, like, the BEST ... KISS ... EVAARRRRR...",
-      "Don't kiss the bouncer, stud-muffin.",
-      "Should someone of your gender be kissing someone of my gender?"
-    ].sample
-  end
-  def vomit
-    [
-      "BLAAEEEACCCRGGGHH.",
-      "* wipes the 'ol face *",
-      "Can you take it outside next time?",
-      "Someone please take away his glass.",
-      "Someone must have played 40's rap."
-
-    ].sample
-  end
 end
 
-
-
-# class yadda
-#   def return_stuff
-#     "stuff"
-#   end
-# end
 
