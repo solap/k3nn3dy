@@ -8,6 +8,14 @@
   @kiss_history
   @vomit_history
   @salutation_history
+  @hug_responses
+  @whodaman_responses
+  @curse_responses
+  @hello_responses
+  @kiss_responses
+  @vomit_responses
+  @salutation_responses
+
 
 
   def initialize
@@ -20,91 +28,14 @@
     @kiss_history = ["First", "Second", "Third"]
     @vomit_history = ["First", "Second", "Third"]
     @salutation_history = ["First", "Second", "Third"]
-  end
-
-  def hug
-    @counter=false
-    while @counter == false
-      @response = hug_response
-      @counter = true if !@hug_history.include?(@response)
-    end
-    @hug_history.pop
-    @hug_history.unshift(@response)
-    @response
-  end
-
-  def whodaman
-    @counter=false
-    while @counter == false
-      @response = whodaman_response
-      @counter = true if !@whodaman_history.include?(@response)
-    end
-    @whodaman_history.pop
-    @whodaman_history.unshift(@response)
-    @response
-  end
-
-  def curse
-    @counter=false
-    while @counter == false
-      @response = curse_response
-      @counter = true if !@curse_history.include?(@response)
-    end
-    @curse_history.pop
-    @curse_history.unshift(@response)
-    @response
-  end
-  def hello
-    @counter=false
-    while @counter == false
-      @response = hello_response
-      @counter = true if !@hello_history.include?(@response)
-    end
-    @hello_history.pop
-    @hello_history.unshift(@response)
-    @response
-  end
-  def kiss
-    @counter=false
-    while @counter == false
-      @response = kiss_response
-      @counter = true if !@kiss_history.include?(@response)
-    end
-    @kiss_history.pop
-    @kiss_history.unshift(@response)
-    @response
-  end
-  def vomit
-    @counter=false
-    while @counter == false
-      @response = vomit_response
-      @counter = true if !@vomit_history.include?(@response)
-    end
-    @vomit_history.pop
-    @vomit_history.unshift(@response)
-    @response
-  end
-  def salutation
-    @counter=false
-    while @counter == false
-      @response = salutation_response
-      @counter = true if !@salutation_history.include?(@response)
-    end
-    @salutation_history.pop
-    @salutation_history.unshift(@response)
-    @response
-  end
-
-  def hug_response
-    [
-      "Get off me, punk!",
-      "Awwww, that's sweet.",
-      "Um, your breath smells like dead stuff.",
-      "I'm married, buddy. Well, I'm committed. Actually, I just don't like you."
-    ].sample
-  end
-
-  def whodaman_response
+    @hug_responses =
+      [
+        "Get off me, punk!",
+        "Awwww, that's sweet.",
+        "Um, your breath smells like dead stuff.",
+        "I'm married, buddy. Well, I'm committed. Actually, I just don't like you."
+      ]
+    @whodaman_responses =
     [
       "My main man, Joel!",
       "Manly Taddly!",
@@ -115,9 +46,8 @@
       "Chris the Bicep",
       "Pete Last Bro",
       "Steve is a TDD nazi."
-    ].sample
-  end
-  def curse_response
+    ]
+    @curse_responses =
     [
       "Damn you, Tadd!",
       "Fetch!",
@@ -131,18 +61,16 @@
       "Gol durn it!",
       "For the love of Pete!",
       "Filthin foul, filth, filth, foul!!"
-    ].sample
-  end
-  def hello_response
+    ]
+    @hello_responses =
     [
       "Yo.",
       "What up?",
       "* ignores the noob *",
       "* looks across the room and finds love *",
       "Ijfi eizz shmieoo pcoi fur dee furmmeeing!!!"
-    ].sample
-  end
-    def kiss_response
+    ]
+    @kiss_responses =
     [
       "I WILL slap you!",
       "<swoon>",
@@ -164,25 +92,57 @@
       "That was, like, the BEST ... KISS ... EVAARRRRR...",
       "Don't kiss the bouncer, stud-muffin.",
       "Should someone of your gender be kissing someone of my gender?"
-    ].sample
-  end
-  def vomit_response
+    ]
+    @vomit_responses =
     [
       "BLAAEEEACCCRGGGHH.",
       "* wipes the 'ol face *",
       "Can you take it outside next time?",
       "Someone please take away his glass.",
       "Someone must have played 40's rap."
+    ]
+    @salutation_responses =
+    [
+      "What up,",
+      "Howdy,",
+      "Yo",
+      "Yes,",
+      "Welcome,"
+    ]
+  end
 
-    ].sample
+
+  def do_action responses, history
+    @counter=false
+    while @counter == false
+      @response = responses.sample
+      @counter = true if !history.include?(@response)
+    end
+    history.pop
+    history.unshift(@response)
+    @response
   end
-  def salutation_response
-  [
-    "What up,",
-    "Howdy,",
-    "Yo",
-    "Yes,",
-    "Welcome,"
-  ].sample
+
+  def hug
+    do_action @hug_responses, @hug_history
   end
+  def whodaman
+    do_action @whodaman_responses, @whodaman_history
+  end
+  def curse
+    do_action @curse_responses, @curse_history
+  end
+  def hello
+    do_action @hello_responses, @hello_history
+  end
+  def kiss
+    do_action @kiss_responses, @kiss_history
+  end
+  def vomit
+    do_action @vomit_responses, @vomit_history
+  end
+  def salutation
+    do_action @salutation_responses, @salutation_history
+  end
+
 end
