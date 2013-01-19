@@ -4,13 +4,16 @@
 require 'turntabler'
 load '~/projects/turntabler/examples/bot.rb'
 
-# To run this, type the following at your command line:
-#   ruby joel.rb [bot_prefix]
+# Create a Turntable account.
 
-# [bot_prefix] is an enrionrment variable you can tie to a turntable account.
+# Include the following in your environment (e.g. via .bash_profile)
+#   export EMAILK="[email you used to set up Turntable]"
+#   export PASSWORDK="[password here]"
+#   export ROOMK="50de2e66aaa5cd1f9b6838f4" # d00gan room
+#   export NAMEK="[current name in TT]" <==it's not critical that you get this right.
 
-#
-
+# To run the bot, type the following at your command line in the turntabler/examples directory:
+#   ruby joel.rb k
 
 ENVVAR = ARGV.first
 ENVEMAIL = 'EMAIL' + ENVVAR.upcase        # 'xxxxx@xxxxx.com'
@@ -23,17 +26,10 @@ PASSWORD = ENV[ENVPASSWORD]
 ROOM = ENV[ENVROOM]
 NAME = ENV[ENVNAME]
 
-puts EMAIL
-puts PASSWORD
-puts ROOM
-puts ENVNAME
-puts NAME
-
 TT.run(EMAIL, PASSWORD, :room => ROOM) do
   bot = Bot.new
   on :user_entered do |user|
     #user.become_fan
-    puts "IN USER ENTERED. ROOM: #{room.name}"
     prefix = user.name[0] == "@" ? '' : '@'
     room.say("#{bot.salutation} #{prefix}#{user.name}!")
   end

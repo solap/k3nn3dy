@@ -37,6 +37,7 @@
       ]
     @whodaman_responses =
     [
+      "Ben der Jammin",
       "My main man, Joel!",
       "Manly Taddly!",
       "Scott of the sensuous beard.",
