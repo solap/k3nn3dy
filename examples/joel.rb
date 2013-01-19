@@ -4,24 +4,36 @@
 require 'turntabler'
 load '~/projects/turntabler/examples/bot.rb'
 
-ENVNAME = ARGV.first
-ENVEMAIL = 'EMAIL' + ENVNAME.upcase         # 'xxxxx@xxxxx.com'
-ENVPASSWORD = 'PASSWORD' + ENVNAME.upcase  # 'xxxxx'
-ENVROOM = 'ROOM' + ENVNAME.upcase          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
+# To run this, type the following at your command line:
+#   ruby joel.rb [bot_prefix]
 
-NAME = "kdkjeiijlaksd" if ARGV[0] == "k"
-NAME = "kindredfacekick" if ARGV[0] == "k2"
-NAME = "K3nn3dy" if ARGV[0] == "k3"
+# [bot_prefix] is an enrionrment variable you can tie to a turntable account.
+
+#
+
+
+ENVVAR = ARGV.first
+ENVEMAIL = 'EMAIL' + ENVVAR.upcase        # 'xxxxx@xxxxx.com'
+ENVPASSWORD = 'PASSWORD' + ENVVAR.upcase  # 'xxxxx'
+ENVROOM = 'ROOM' + ENVVAR.upcase          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
+ENVNAME = 'NAME' + ENVVAR.upcase          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
 
 EMAIL = ENV[ENVEMAIL]
 PASSWORD = ENV[ENVPASSWORD]
 ROOM = ENV[ENVROOM]
+NAME = ENV[ENVNAME]
+
+puts EMAIL
+puts PASSWORD
+puts ROOM
+puts ENVNAME
+puts NAME
 
 TT.run(EMAIL, PASSWORD, :room => ROOM) do
   bot = Bot.new
   on :user_entered do |user|
     #user.become_fan
-    
+    puts "IN USER ENTERED. ROOM: #{room.name}"
     prefix = user.name[0] == "@" ? '' : '@'
     room.say("#{bot.salutation} #{prefix}#{user.name}!")
   end
@@ -31,6 +43,7 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
   on :user_spoke do |message|
     room.say yadda(message.content, message.sender, bot) if message.sender.id != user.id
   end
+
   def yadda(incoming, sender, bot)
     case incoming
       when /^\/hello$/
