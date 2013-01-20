@@ -23,12 +23,14 @@ PASSWORD = ENV[ENVPASSWORD]
 ROOM = ENV[ENVROOM]
 NAME = ENV[ENVNAME]
 
+
+# currently requires two. create a check for two environment vars.
 EMAIL2 = ENV[ENVEMAIL2]
 PASSWORD2 = ENV[ENVPASSWORD2]
 ROOM2 = ENV[ENVROOM2]
 NAME2 = ENV[ENVNAME2]
 
-# Create a Turntable account.
+# Create two Turntable accounts.
 
 # Include the following in your environment (e.g. via .bash_profile)
 #   export EMAILK="[email you used to set up Turntable]"
@@ -36,8 +38,14 @@ NAME2 = ENV[ENVNAME2]
 #   export ROOMK="50de2e66aaa5cd1f9b6838f4" # d00gan room
 #   export NAMEK="[current name in TT]" <==it's not critical that you get this right.
 
-# To run the bot, type the following at your command line in the turntabler/examples directory:
-#   ruby joel.rb k
+#   export EMAILK3="[email you used to set up Turntable]"
+#   export PASSWORDK3="[password here]"
+#   export ROOMK3="50de2e66aaa5cd1f9b6838f4" # d00gan room
+#   export NAMEK3="[current name in TT]" <==it's not critical that you get this right.
+
+
+# To run the bot, type the following at your command line in the turntabler directory:
+#   ruby joel.rb k k3
 
 counter = Thread.new do
   TT.run do

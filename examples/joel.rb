@@ -46,14 +46,6 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
   end
 
   end
-  def dive user
-    return [
-      "#{user} lays it out!",
-      "BAM! #{user} loses a tooth in the mosh pit.",
-      "#{user} excuses himself for a quick bio break.",
-      "Screams rise as #{user} catapults into the crowd!"
-    ].sample
-  end
 end
 
 
