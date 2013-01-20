@@ -1,1 +1,0 @@
-puts "joel dehlin".split[0]

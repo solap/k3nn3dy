@@ -33,14 +33,12 @@ NAME = ENV[ENVNAME]
 TT.run(EMAIL, PASSWORD, :room => ROOM) do
   bot = Bot.new
   on :user_entered do |user|
-    #user.become_fan
     prefix = user.name[0] == "@" ? '' : '@'
     room.say("#{bot.salutation} #{prefix}#{user.name}!")
   end
   on :song_started do |song|
     song.vote
   end
-  # fix loop when two bots are both talking
   on :user_spoke do |message|
     room.say yadda(message.content, message.sender, bot) if message.sender.id != user.id
   end

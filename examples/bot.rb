@@ -136,8 +136,6 @@ class Bot
     @fred.room.say "#{salutation} #{prefix}#{user.name}!"
   end
   def talk
-    sleep 1
-    @fred.room.say "IN TALK METHOD"
   end
   def hug
     do_action @hug_responses, @hug_history
@@ -188,8 +186,6 @@ class Bot
       when "stepdown"
         @fred.user.remove_as_dj # need error checking here
       when "dive"
-        print "******** "
-        puts sender.name
         sender.remove_as_dj # need error checking here.
         @fred.room.say(dive(sender.name))
       when "song"
