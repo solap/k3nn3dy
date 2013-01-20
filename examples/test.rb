@@ -1,6 +1,1 @@
-ENVNAME = ARGV.first
-
-ENVMAIL = 'EMAIL' + ENVNAME.upcase
-
-puts ENVMAIL
-
+puts "joel dehlin".split[0]

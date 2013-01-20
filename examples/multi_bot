@@ -1,0 +1,5 @@
+
+t1 = Thread.new do
+  puts "yo mamma"
+end
+t1.join

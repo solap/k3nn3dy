@@ -2,7 +2,9 @@
 # Each time a a new song starts, vote it up
 # Ruby style guide: https://github.com/bbatsov/ruby-style-guide
 require 'turntabler'
-load '~/projects/turntabler/examples/bot.rb'
+# load '~/projects/turntabler/examples/bot.rb'
+load 'bot.rb'
+
 
 # Create a Turntable account.
 
@@ -26,6 +28,8 @@ PASSWORD = ENV[ENVPASSWORD]
 ROOM = ENV[ENVROOM]
 NAME = ENV[ENVNAME]
 
+#client = TT::Client.new("joel@dehlin.org", "password", :room => "50de2e66aaa5cd1f9b6838f4")
+
 TT.run(EMAIL, PASSWORD, :room => ROOM) do
   bot = Bot.new
   on :user_entered do |user|
@@ -36,50 +40,11 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
   on :song_started do |song|
     song.vote
   end
+  # fix loop when two bots are both talking
   on :user_spoke do |message|
     room.say yadda(message.content, message.sender, bot) if message.sender.id != user.id
   end
 
-  def yadda(incoming, sender, bot)
-    case incoming
-      when /^\/hello$/
-        room.say(bot.hello)
-      when /^\/curse$/
-        room.say(bot.curse)
-      when /^\/whodaman$/
-        room.say(bot.whodaman)
-      when /^\/kiss$/
-        room.say(bot.kiss)
-      when /^\/hug$/
-        room.say(bot.hug)
-      when /^\/stepup$/
-        room.become_dj # need error checking here
-      when /^\/stepdown$/
-        user.remove_as_dj # need error checking here
-      when /^\/dive$/
-        sender.remove_as_dj # need error checking here.
-        return dive(sender.name)
-      when /^\/song$/
-        room.say("title: #{room.current_song.title}")
-        # room.say("isrc: #{room.current_song.isrc}")
-        # room.say("source: #{room.current_song.source}")
-        # room.say("source_id: #{room.current_song.source_id}")
-        # room.say("current_song: #{room.current_song.inspect}")
-      when /^\/artist$/
-        room.say(room.current_song.artist)
-      when /^\/album$/
-        room.say(room.current_song.album)
-      when /^\/skip$/
-        room.current_song.skip
-      when /^\/commands$/
-        room.say("#{NAME} accepts the following commands: /album, /song, /artist, /hug, /kiss, /whodaman, /curse, and /hello. If #{NAME} is in the audience, you can command #{NAME} to /stepup. If at the table, /stepdown. If you are at the table, you can /dive.")
-        #room.say("test")
-      when /^\/vomit$/
-        return vomit
-
-      # else
-      #   room.say("wtf does that mean?") if message.content
-    end
   end
   def dive user
     return [
@@ -89,7 +54,6 @@ TT.run(EMAIL, PASSWORD, :room => ROOM) do
       "Screams rise as #{user} catapults into the crowd!"
     ].sample
   end
-
 end
 
 
