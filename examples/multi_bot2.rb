@@ -28,17 +28,6 @@ PASSWORD2 = ENV[ENVPASSWORD2]
 ROOM2 = ENV[ENVROOM2]
 NAME2 = ENV[ENVNAME2]
 
-puts EMAIL
-puts PASSWORD
-puts ROOM
-puts NAME
-
-puts EMAIL2
-puts PASSWORD2
-puts ROOM2
-puts NAME2
-
-
 # Create a Turntable account.
 
 # Include the following in your environment (e.g. via .bash_profile)
