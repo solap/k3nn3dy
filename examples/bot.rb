@@ -192,23 +192,22 @@ class Bot
         puts sender.name
         sender.remove_as_dj # need error checking here.
         @fred.room.say(dive(sender.name))
-      # when /^\/song$/
-      #   room.say("title: #{room.current_song.title}")
-      #   # room.say("isrc: #{room.current_song.isrc}")
-      #   # room.say("source: #{room.current_song.source}")
-      #   # room.say("source_id: #{room.current_song.source_id}")
-      #   # room.say("current_song: #{room.current_song.inspect}")
-      # when /^\/artist$/
-      #   room.say(room.current_song.artist)
-      # when /^\/album$/
-      #   room.say(room.current_song.album)
-      # when /^\/skip$/
-      #   room.current_song.skip
-      # when /^\/commands$/
-      #   room.say("#{NAME} accepts the following commands: /album, /song, /artist, /hug, /kiss, /whodaman, /curse, and /hello. If #{NAME} is in the audience, you can command #{NAME} to /stepup. If at the table, /stepdown. If you are at the table, you can /dive.")
-      #   #room.say("test")
-      # when /^\/vomit$/
-      #   return vomit
+      when "song"
+        @fred.room.say("title: #{@fred.room.current_song.title}")
+        # room.say("isrc: #{room.current_song.isrc}")
+        # room.say("source: #{room.current_song.source}")
+        # room.say("source_id: #{room.current_song.source_id}")
+        # room.say("current_song: #{room.current_song.inspect}")
+      when "artist"
+        @fred.room.say(@fred.room.current_song.artist)
+      when "album"
+        @fred.room.say(@fred.room.current_song.album)
+      when "skip"
+        @fred.room.current_song.skip #check if this bot is playing the current song.
+      when "commands"
+        @fred.room.say("I accept the following commands: album, song, artist, hug, kiss, whodaman, curse, and hello. If I'm in the audience, you can command me to stepup. If at the table, stepdown. If you are at the table, you can ask me to help you dive.")
+      when "vomit"
+        @fred.room.say(vomit)
       # else
       #   room.say("wtf does that mean?") if message.content
       end

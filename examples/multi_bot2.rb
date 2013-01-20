@@ -4,6 +4,41 @@
 require 'turntabler'
 load '~/projects/turntabler/examples/bot.rb'
 
+ENVVAR = ARGV.first
+ENVVAR2 = ARGV[1]
+
+ENVEMAIL = 'EMAIL' + ENVVAR.upcase        # 'xxxxx@xxxxx.com'
+ENVPASSWORD = 'PASSWORD' + ENVVAR.upcase  # 'xxxxx'
+ENVROOM = 'ROOM' + ENVVAR.upcase          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
+ENVNAME = 'NAME' + ENVVAR.upcase          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
+
+ENVEMAIL2 = 'EMAIL' + ENVVAR2.upcase        # 'xxxxx@xxxxx.com'
+ENVPASSWORD2 = 'PASSWORD' + ENVVAR2.upcase  # 'xxxxx'
+ENVROOM2 = 'ROOM' + ENVVAR2.upcase          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
+ENVNAME2 = 'NAME' + ENVVAR2.upcase          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
+
+
+EMAIL = ENV[ENVEMAIL]
+PASSWORD = ENV[ENVPASSWORD]
+ROOM = ENV[ENVROOM]
+NAME = ENV[ENVNAME]
+
+EMAIL2 = ENV[ENVEMAIL2]
+PASSWORD2 = ENV[ENVPASSWORD2]
+ROOM2 = ENV[ENVROOM2]
+NAME2 = ENV[ENVNAME2]
+
+puts EMAIL
+puts PASSWORD
+puts ROOM
+puts NAME
+
+puts EMAIL2
+puts PASSWORD2
+puts ROOM2
+puts NAME2
+
+
 # Create a Turntable account.
 
 # Include the following in your environment (e.g. via .bash_profile)
@@ -17,7 +52,7 @@ load '~/projects/turntabler/examples/bot.rb'
 
 counter = Thread.new do
   TT.run do
-    client = TT::Client.new("joel@dehlin.org", "password", :room => "50de2e66aaa5cd1f9b6838f4")
+    client = TT::Client.new(EMAIL, PASSWORD, :room => ROOM)
     fred = Bot.new(client)
     fred.talk
 
@@ -37,7 +72,7 @@ end
 
 counter2 = Thread.new do
   TT.run do
-    client2 = TT::Client.new("joel.dehlin@gmail.com", "was999up", :room => "50de2e66aaa5cd1f9b6838f4")
+    client2 = TT::Client.new(EMAIL2, PASSWORD2, :room => "50de2e66aaa5cd1f9b6838f4")
     fred2 = Bot.new(client2)
     fred2.talk
 
