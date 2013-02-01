@@ -17,13 +17,13 @@ ARGV.each_with_index do |string, index|
   end
 end
 
-# Create two Turntable accounts.
+# Create Turntable accounts.
 
 # Include the following in your environment (e.g. via .bash_profile)
-#   export EMAILK="[email you used to set up Turntable]"
-#   export PASSWORDK="[password here]"
-#   export ROOMK="50de2e66aaa5cd1f9b6838f4" # d00gan room
-#   export NAMEK="[current name in TT]" <==it's not critical that you get this right.
+#   export EMAILK1="[email you used to set up Turntable]"
+#   export PASSWORDK1="[password here]"
+#   export ROOMK1="50de2e66aaa5cd1f9b6838f4" # d00gan room
+#   export NAMEK1="[current name in TT]" <==it's not critical that you get this right.
 
 #   export EMAILK2="[email you used to set up Turntable]"
 #   export PASSWORDK2="[password here]"
