@@ -4,20 +4,18 @@
 require 'turntabler'
 load 'bot.rb'
 
-# (0...ARGV.length).each do |i|
-#   puts ARGV[i]
-# end
-
-EMAIL = ENV['EMAIL' + ARGV[0].upcase]        # 'xxxxx@xxxxx.com'
-PASSWORD = ENV['PASSWORD' + ARGV[0].upcase]  # 'xxxxx'
-ROOM = ENV['ROOM' + ARGV[0].upcase]          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
-NAME = ENV['NAME' + ARGV[0].upcase]         # 'xxxxxxxxxxxxxxxxxxxxxxxx'
-
-EMAIL2 = ENV['EMAIL' + ARGV[1].upcase]        # 'xxxxx@xxxxx.com'
-PASSWORD2 = ENV['PASSWORD' + ARGV[1].upcase]  # 'xxxxx'
-ROOM2 = ENV['ROOM' + ARGV[1].upcase]          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
-NAME2 = ENV['NAME' + ARGV[1].upcase]          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
-
+ARGV.each_with_index do |string, index|
+  if index==0
+    ROOM = ENV['ROOM' + ARGV[0].upcase]          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
+  else
+    str = "EMAIL#{index} = ENV['EMAIL' + ARGV[index].upcase]"
+    eval(str)
+    str = "PASSWORD#{index} = ENV['PASSWORD' + ARGV[index].upcase]"
+    eval(str)
+    str = "NAME#{index} = ENV['NAME' + ARGV[index].upcase]"
+    eval(str)
+  end
+end
 
 # Create two Turntable accounts.
 
@@ -36,14 +34,13 @@ NAME2 = ENV['NAME' + ARGV[1].upcase]          # 'xxxxxxxxxxxxxxxxxxxxxxxx'
 # To run the bot, type the following at your command line in the turntabler directory:
 #   ruby k3nn3dy.rb k k2
 
-
 def new_bot email, password, room
   counter = Thread.new do
     TT.run do
       client = TT::Client.new(email, password, room: room)
       my_bot = Bot.new(client)
-      my_bot.talk
       client.on :user_spoke do |message|
+        puts "**** in :user_spoke message: #{message.content}"
         my_bot.tell(message.content, message.sender) if message.content.split[0] == client.user.name
       end
       client.on :user_entered do |user|
@@ -56,10 +53,14 @@ def new_bot email, password, room
   end
 end
 
-
-bot1 = new_bot EMAIL, PASSWORD, ROOM
+bot1 = new_bot EMAIL1, PASSWORD1, ROOM
 bot2 = new_bot EMAIL2, PASSWORD2, ROOM
-
+bot3 = new_bot EMAIL3, PASSWORD3, ROOM
+bot4 = new_bot EMAIL4, PASSWORD4, ROOM
+bot1.join
+bot2.join
+bot3.join
+bot4.join
 
 # counter = Thread.new do
 #   TT.run do
@@ -97,6 +98,4 @@ bot2 = new_bot EMAIL2, PASSWORD2, ROOM
 #   end
 # end
 
-bot1.join
-bot2.join
 

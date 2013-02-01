@@ -89,10 +89,10 @@ class Bot
     @salutation_responses =
     [
       "What up,",
-      "Howdy,",
-      "Yo",
-      "Yes,",
-      "Welcome,"
+      "howdy,",
+      "yo",
+      "Welcome,",
+      "hey"
     ]
   end
   def dive user
@@ -118,8 +118,6 @@ class Bot
     sleep 1
     prefix = user.name[0] == "@" ? '' : '@'
     @fred.room.say "#{salutation} #{prefix}#{user.name}!"
-  end
-  def talk
   end
   def hug
     do_action @hug_responses, @hug_history
