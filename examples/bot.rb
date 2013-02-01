@@ -1,21 +1,5 @@
 class Bot
 
-  @fred
-  @hug_history
-  @whodaman_history
-  @curse_history
-  @hello_history
-  @kiss_history
-  @vomit_history
-  @salutation_history
-  @hug_responses
-  @whodaman_responses
-  @curse_responses
-  @hello_responses
-  @kiss_responses
-  @vomit_responses
-  @salutation_responses
-
   def initialize(client)
     @fred = client
     @hug_history = ["First", "Second", "Third"]
